@@ -23,13 +23,11 @@ window_size = 16
 bloc_size = 256
 ```
 
-<div style="text-align: center;">
-  <img src="./forward_time_vs_tokens_log.png" alt="attention pattern" width="300">
+<div style="display: flex; justify-content: space-around;">
+  <img src="./forward_time_vs_tokens_log.png" alt="attention pattern" width="45%">
+  <img src="./backward_time_vs_tokens_log.png" alt="attention pattern" width="45%">
 </div>
 
-<div style="text-align: center;">
-  <img src="./backward_time_vs_tokens_log.png" alt="attention pattern" width="300">
-</div>
 
 ## Usage
 
