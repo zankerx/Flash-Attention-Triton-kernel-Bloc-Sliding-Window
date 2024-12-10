@@ -14,7 +14,22 @@ This kernel is defined by two parameters : the bloc size (ex : the number of tok
 
 ## Performance vs torch implementation
 
-Coming Soon
+Average performance with :
+
+```python
+batch_size = 1
+num_head = 12
+window_size = 16
+bloc_size = 256
+```
+
+<div style="text-align: center;">
+  <img src="./forward_time_vs_tokens_log.png" alt="attention pattern" width="300">
+</div>
+
+<div style="text-align: center;">
+  <img src="./backward_time_vs_tokens_log.png" alt="attention pattern" width="300">
+</div>
 
 ## Usage
 
