@@ -17,7 +17,7 @@ This kernel is defined by two parameters : the bloc size (ex : the number of tok
 
 ## Usage
 
-`
+```python
 import torch
 from kernel.SWBA import attention
 
@@ -44,7 +44,7 @@ do = torch.randn_like(q)
 out = attention(q, k, v, BS, WS, sm_scale) # forward
 
 out.backward(do) # backward
-`
+```
 
 
 
