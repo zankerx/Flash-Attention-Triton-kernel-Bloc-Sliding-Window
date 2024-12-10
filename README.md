@@ -58,7 +58,7 @@ out.backward(do) # backward
 Ineficient torch implementation :
 
 ```python
-def SBA(q,k,v,sm_scale,bs,ws):
+def SBA(q, k, v, bs, ws, sm_scale):
     
     # q,k,v : [B, NH, N, DH]
 
@@ -71,11 +71,8 @@ def SBA(q,k,v,sm_scale,bs,ws):
     mask = mask.repeat_interleave(bs,1)
     mask = mask.unsqueeze(0).unsqueeze(0) # [1,1,N,N]
 
-
     attn = (q @ k.transpose(-2, -1)) * sm_scale # [B, NH, N, N]
-
     attn = attn + mask.to(attn.dtype)
-
     attn = attn.softmax(dim=-1)
 
     out = attn @ v
