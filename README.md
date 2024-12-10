@@ -53,4 +53,35 @@ out.backward(do) # backward
 ```
 
 
+## Naive torch implementation :
+
+Ineficient torch implementation :
+
+```python
+def SBA(q,k,v,sm_scale,bs,ws):
+    
+    # q,k,v : [B, NH, N, DH]
+
+    B, NH, N, DH = q.size()
+    NB = N//bs
+
+    mask = torch.triu(torch.ones((NB,NB), device=q.device), diagonal=1) + torch.tril(torch.ones((NB,NB), device=q.device), diagonal=-ws)
+    mask = torch.masked_fill(mask, mask == 1.0, float('-inf'))
+    mask = mask.repeat_interleave(bs,0)
+    mask = mask.repeat_interleave(bs,1)
+    mask = mask.unsqueeze(0).unsqueeze(0) # [1,1,N,N]
+
+
+    attn = (q @ k.transpose(-2, -1)) * sm_scale # [B, NH, N, N]
+
+    attn = attn + mask.to(attn.dtype)
+
+    attn = attn.softmax(dim=-1)
+
+    out = attn @ v
+
+    return out
+```
+
+
 
