@@ -14,8 +14,12 @@ This kernel is defined by two parameters : the bloc size (ex : the number of tok
 
 ## Performance vs torch implementation
 
+Coming Soon
 
 ## Usage
+
+This kernel is designed for fp16 precision.
+The bloc size need to be divisible by 64 and 128 (You can modify BLOC_M and BLOC_N parameters to avoid this constraint).
 
 ```python
 import torch
