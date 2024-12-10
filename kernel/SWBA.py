@@ -4,7 +4,7 @@ import triton.language as tl
 
 '''
 
-Modifications from https://github.com/kyegomez/FlashAttention20Triton/blob/main/flashtriton/attention.py
+Modifications of https://github.com/kyegomez/FlashAttention20Triton/blob/main/flashtriton/attention.py
 
 '''
 
@@ -48,7 +48,7 @@ def _fwd_kernel(
         base=K + qvk_offset,
         shape=(BLOCK_DMODEL, N_CTX),
         strides=(stride_kk, stride_kn),
-        offsets=(0, lo),
+        offsets=(0, lo), #offset modif
         block_shape=(BLOCK_DMODEL, BLOCK_N),
         order=(0, 1)
     )
@@ -56,7 +56,7 @@ def _fwd_kernel(
         base=V + qvk_offset,
         shape=(N_CTX, BLOCK_DMODEL),
         strides=(stride_vk, stride_vn),
-        offsets=(lo, 0),
+        offsets=(lo, 0), #offset modif
         block_shape=(BLOCK_N, BLOCK_DMODEL),
         order=(1, 0)
     )
@@ -78,7 +78,7 @@ def _fwd_kernel(
 
     
 
-    for start_n in range(lo, hi, BLOCK_N):
+    for start_n in range(lo, hi, BLOCK_N): # lo and hi modif
         # -- load k, v --
         k = tl.load(K_block_ptr)
         v = tl.load(V_block_ptr)
@@ -164,7 +164,8 @@ def _bwd_kernel(
     DV += off_z * stride_qz + off_h * stride_qh
     
     for start_n in range(0, num_block):
-
+        
+        #lo hi modif
         lo = (start_n*BLOCK_M//BS)*BS
         hi = lo + BS*WS
         hi = hi if hi <= num_block * BLOCK_M else num_block * BLOCK_M
