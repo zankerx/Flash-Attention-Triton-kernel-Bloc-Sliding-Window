@@ -12,7 +12,7 @@ This kernel is defined by two parameters : the bloc size (ex : the number of tok
 </div>
 
 
-## Performance vs torch implementation
+## Performance vs torch implementation (FP16)
 
 Average performance with :
 
