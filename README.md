@@ -20,6 +20,7 @@ Coming Soon
 
 This kernel is designed for fp16 precision.
 The bloc size need to be divisible by 64 and 128 (You can modify BLOC_M and BLOC_N parameters to avoid this constraint).
+Also the number of tokens need to be divisible by bloc size.
 
 ```python
 import torch
@@ -35,7 +36,8 @@ WS = 4 # window size
 
 # BS % BLOCK_M == 128/64 and BS % BLOCK_N == 128/64
 assert BS % 128 == 0 
-assert BS % 64 == 0 
+assert BS % 64 == 0
+assert N % BS == 0 
 
 sm_scale = 1/(D_HEAD**0.5)
 
