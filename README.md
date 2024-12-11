@@ -12,7 +12,7 @@ The attention pattern is defined by two parameters : the bloc size (ex : the num
 </div>
 
 
-## Performance vs torch implementation (FP16)
+## Performance vs torch implementation (FP16 A100 SXM)
 
 Average performance with :
 
